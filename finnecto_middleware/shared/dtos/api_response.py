@@ -7,7 +7,7 @@ class ApiResponse(BaseModel):
     item: Any | None = None
     errors: Any | None = None
 
-    @classmethod()
+    @classmethod
     def success(cls, item: Any, message: str="success") -> "ApiResponse":
         return cls(status=200, message=message, item=item, errors=None)
     
