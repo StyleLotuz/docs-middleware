@@ -1,3 +1,4 @@
+import logging
 from typing import Any
 from shared.auth.jwt_claims import JWTClaims
 from shared.services.http_forwarder import forward_request
@@ -6,6 +7,8 @@ from modules.invoice.domain.constants.connection_type import ConnectionType
 from modules.invoice.domain.entities.invoice import Invoice
 from modules.invoice.domain.entities.invoice_item import InvoiceItem
 from modules.invoice.domain.factories.connection_factory import ConnectionFactory
+
+logger = logging.getLogger(__name__)
 
 TAX_RATE = 0.19
 
@@ -16,8 +19,11 @@ class InvoiceForwardUseCase:
         
         if claims.connection_type == ConnectionType.LEGACY:
             invoice.apply_tax(TAX_RATE)
+            logger.info("Tax applied | rate=%s | new_total=%s", TAX_RATE, invoice.total)
             
         body = transformer.to_target_format(invoice)
+        logger.info("Body transformer to %s format ", claims.connection_type)
+        
         auth_header = auth_strategy.build_auth_header()
         
         response = await forward_request(
@@ -27,6 +33,7 @@ class InvoiceForwardUseCase:
         )
         
         result = transformer.to_standard_format(response)
+        logger.info("Response transformed back to standard format")
         return result
         
     def _build_entity(self, dto: InvoiceDTO) -> Invoice:

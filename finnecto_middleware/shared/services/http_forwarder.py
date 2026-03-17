@@ -1,6 +1,9 @@
+import logging
 from typing import Any
 import httpx
 from config import settings
+
+logger = logging.getLogger(__name__)
 
 ENDPOINT_MAP = {
     "legacy": "/legacy",
@@ -24,5 +27,7 @@ async def forward_request(
             json=body,
             headers={"Authorization": auth_header}
         )
+        
+    logger.info("Response received | status=%s", response.status_code)
     response.raise_for_status()
     return response.json()
