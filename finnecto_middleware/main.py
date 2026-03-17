@@ -1,8 +1,15 @@
 from fastapi import FastAPI
 from modules.invoice.presentation.controllers.invoice_controller import router as invoice_router
 from fastapi.exceptions import RequestValidationError
-from jwt.exceptions import JWTDecodeError
+from jwt.exceptions import DecodeError
 import httpx
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(name)s | %(levelname)s | %(message)s",
+)
+
 
 from shared.exceptions.handlers import (
     jwt_exception_handler,
@@ -18,7 +25,7 @@ app = FastAPI(
     version="0.1.0"
 )
 
-app.add_exception_handler(JWTDecodeError, jwt_exception_handler)
+app.add_exception_handler(DecodeError, jwt_exception_handler)
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
 app.add_exception_handler(httpx.HTTPStatusError, http_forward_exception_handler)
 app.add_exception_handler(httpx.ConnectError, connect_exception_handler)

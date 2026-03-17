@@ -1,5 +1,5 @@
 from enum import Enum
 
-class ConnectionType(Enum, str):
+class ConnectionType(str, Enum):
     LEGACY = "legacy"
     TAXEABLE = "taxeable"

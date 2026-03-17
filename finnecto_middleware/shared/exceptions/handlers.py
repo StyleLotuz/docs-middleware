@@ -1,11 +1,11 @@
 from fastapi import Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
-from jwt.exceptions import JWTDecodeError
+from jwt.exceptions import DecodeError
 import httpx
 from shared.dtos.api_response import ApiResponse
 
-async def jwt_exception_handler(request: Request, exc: JWTDecodeError) -> JSONResponse:
+async def jwt_exception_handler(request: Request, exc: DecodeError) -> JSONResponse:
     response = ApiResponse.error(status=401, message=str(exc))
     return JSONResponse(status_code=401, content=response.model_dump())
 

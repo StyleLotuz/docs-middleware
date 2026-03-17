@@ -264,11 +264,11 @@ curl http://localhost:3000/health
 
 ### Endpoints
 
-| Método | Ruta | Auth | Body |
-|--------|------|------|------|
-| POST | `/legacy` | Basic Auth | Formato legacy |
-| POST | `/taxeable` | Bearer JWT | Formato taxeable |
-| GET | `/health` | — | — |
+| Método | Ruta        | Auth       | Body             |
+|--------|-------------|------------|------------------|
+| POST   | `/legacy`   | Basic Auth | Formato legacy   |
+| POST   | `/taxeable` | Bearer JWT | Formato taxeable |
+| GET    | `/health`   | —----------| —----------------|
 
 Credenciales por defecto: Basic Auth `legacy_user` / `legacy_pass`; JWT firmado con `JWT_SECRET`, `JWT_ISSUER`, `JWT_AUDIENCE`.
 

@@ -14,4 +14,4 @@ class InvoiceDTO:
     due_date: str
     currency: str
     total: float
-    item: list[InvoiceItemDTO]
+    items: list[InvoiceItemDTO]
