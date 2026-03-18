@@ -1,0 +1,22 @@
+services:
+  mock-server:
+    build: ../mock-server
+    ports:
+      - "3000:3000"
+    environment:
+      - BASIC_AUTH_USERNAME=legacy_user
+      - BASIC_AUTH_PASSWORD=legacy_pass
+      - JWT_SECRET=mock-jwt-secret
+      - JWT_ISSUER=middleware_mock
+      - JWT_AUDIENCE=taxeable-api
+    
+  middleware:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MOCK_SERVER_URL=http://mock-server:3000
+      - JWT_DECODE_SECRET=incoming-jwt-dev-secret
+    depends_on:
+      - mock-server
+      
