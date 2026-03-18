@@ -10,11 +10,11 @@ class Invoice:
             total: float,
             items: list[InvoiceItem]
         ):
-        self.number = number,
-        self.reception_date = reception_date,
-        self.due_date = due_date,
-        self.currency = currency,
-        self.total = total,
+        self.number = number
+        self.reception_date = reception_date
+        self.due_date = due_date
+        self.currency = currency
+        self.total = total
         self.items = items
         
     def apply_tax(self, rate: float) -> None:
