@@ -17,30 +17,30 @@ Orquestador basado en pipeline dinámico, donde cada request determina su compor
 
 - Python \(>= 3.14\)
 - [Poetry]
-- (Opcional) Docker + Docker Compose para levantar el mock
+ - (Opcional) Docker + Docker Compose para levantar mock y middleware
 
 ## Variables de entorno
 
-Este servicio soporta `.env` (ver `.env.example`).
+Este servicio soporta `.env` (ver `.env.example`). En modo “estricto”, estas variables son requeridas.
 
-- **`MOCK_SERVER_URL`**: base URL del mock. Default: `http://localhost:3000`
-- **`JWT_DECODE_SECRET`**: secret para validar/decodificar el JWT entrante. Default: `incoming-jwt-dev-secret`
+- **`MOCK_SERVER_URL`**: base URL del mock
+- **`JWT_DECODE_SECRET`**: secret para validar/decodificar el JWT entrante
 
 ## Cómo ejecutar
 
-### Levantar el mock server
+### Levantar mock y middleware (Docker)
 
-Con Docker:
+Desde `finnecto_middleware/`:
 
 ```bash
-cd ../mock-server
-docker-compose up --build
+docker compose up --build
 ```
 
 Verificar:
 
 ```bash
 curl http://localhost:3000/health
+curl http://localhost:8000/health
 ```
 
 ### Levantar el middleware
