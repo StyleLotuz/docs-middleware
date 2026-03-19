@@ -1,12 +1,11 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pathlib import Path
 
 class Settings(BaseSettings):
-    # Usamos valores por defecto en nuestras variables para hacer mas facil levantarlas
-    # En un caso de produccion seria mas eficiente no dar este valor y 
-    # En ese caso la variables tendria que estar si o si en el .env
-    mock_server_url: str = "http://localhost:3000"
-    jwt_decode_secret: str = "incoming-jwt-dev-secret"
+    # Modo estricto: estas variables deben existir en `.env` o por env vars.
+    mock_server_url: str
+    jwt_decode_secret: str
     
-    model_config = SettingsConfigDict(env_file=".env")
+    model_config = SettingsConfigDict(env_file=str(Path(__file__).resolve().parent / ".env"))
     
 settings = Settings()
