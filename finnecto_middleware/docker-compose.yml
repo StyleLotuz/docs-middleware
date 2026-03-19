@@ -7,7 +7,7 @@ services:
       - BASIC_AUTH_USERNAME=legacy_user
       - BASIC_AUTH_PASSWORD=legacy_pass
       - JWT_SECRET=mock-jwt-secret
-      - JWT_ISSUER=middleware_mock
+      - JWT_ISSUER=middleware-mock
       - JWT_AUDIENCE=taxeable-api
     
   middleware:
