@@ -17,7 +17,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     )
     return JSONResponse(status_code=400, content=response.model_dump())
 
-async def http_forward_exception_handler(resquest: Request, exc: httpx.HTTPStatusError) -> JSONResponse:
+async def http_forward_exception_handler(request: Request, exc: httpx.HTTPStatusError) -> JSONResponse:
     response = ApiResponse.error(status=502, message="Integration error with destination system")
     return JSONResponse(status_code=502, content=response.model_dump())
 
